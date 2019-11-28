@@ -14,6 +14,8 @@
 		"bin-debug/Box.js",
 		"bin-debug/GameOver.js",
 		"bin-debug/Main.js",
+		"bin-debug/Orbit.js",
+		"bin-debug/Player.js",
 		"bin-debug/Score.js",
 		"bin-debug/Util.js"
 	]
