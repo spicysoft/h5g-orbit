@@ -7,6 +7,11 @@ class Player extends GameObject
     private prePos : egret.Point = null;
     private ang : number = 0;
     private rad : number = 160;
+    private isTouch : boolean = false;
+    private angSpd : number = 0;
+    private angAcc : number = 0;
+    private framRate : number = 1/60;
+    private baseSpd : number = 0;
 
     constructor() {
         super();
@@ -23,15 +28,44 @@ class Player extends GameObject
 
         this.pos = this.pos.add(this.center);
 
-        this.setShape(this.pos.x, this.pos.y, 10);
+        this.setShape(this.pos.x, this.pos.y, 16);
 
-        /*let ang = Math.PI;
-        let s = Math.sin( ang );
-        let c = Math.cos( ang );
-        console.log("s = " + s + "c = " + c);*/
+        this.baseSpd = Math.PI*0.6;
+        this.angSpd = this.baseSpd;
+        this.angAcc = Math.PI*0.01;
 
+        egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
+        egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
     }
 
+    onDestroy() {
+        GameObject.display.removeChild( this.shape );
+        this.shape = null;
+        Player.I = null;
+    }
+
+
+    private touchHandler( evt:egret.TouchEvent ){
+        switch ( evt.type ){
+            case egret.TouchEvent.TOUCH_MOVE:
+                //console.log("touch move");
+                break;
+            case egret.TouchEvent.TOUCH_BEGIN:
+                //egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this );
+                //egret.MainContext.instance.stage.once( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
+                //console.log("touch begin");
+                this.isTouch = true;
+                //new GameOver();
+                break;
+            case egret. TouchEvent.TOUCH_END:
+                //egret.MainContext.instance.stage.removeEventListener( egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this );
+                //egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
+                //console.log("touch end");
+                this.isTouch = false;                
+                break;
+        }
+    }
+    
 
     setShape(x: number, y:number, radius: number)
     {
@@ -56,18 +90,36 @@ class Player extends GameObject
 
     updateContent()
     {
-        let aspd = Math.PI*0.4 * (1/60);
-        this.ang += aspd;
+        if( this.isTouch ){
+            this.angSpd -= this.angAcc;
+            if( this.angSpd < Math.PI*0.1 ){
+                this.angSpd = Math.PI*0.1;
+            }
+        }
+        else{
+            this.angSpd += this.angAcc;
+            if( this.angSpd > this.baseSpd ){
+                this.angSpd = this.baseSpd;
+            }
+        }
 
-        this.pos.x = Math.cos( this.ang ) * this.rad;
-        this.pos.y = Math.sin( this.ang ) * this.rad;
+        this.ang += this.angSpd * this.framRate;
+        if( this.ang > Math.PI*2 ){
+            this.ang -= Math.PI*2;
+        }
 
-        this.pos = this.pos.add( this.center );
+
+        let nextPos = new egret.Point();
+        nextPos.x = Math.cos( this.ang ) * this.rad;
+        nextPos.y = Math.sin( this.ang ) * this.rad;
+
+        nextPos = nextPos.add( this.center );
+
+        this.pos = nextPos;
 
         this.shape.x = this.pos.x;
         this.shape.y = this.pos.y;
 
     }
-
 
 }

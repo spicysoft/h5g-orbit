@@ -11,6 +11,10 @@ class Orbit extends GameObject
         this.setShape(0.5*Game.width, 0.5*Game.height, 160);
     }
 
+    onDestroy() {
+        GameObject.display.removeChild( this.shape );
+        this.shape = null;
+    }
 
     setShape(x: number, y:number, radius: number){
         if( this.shape ){

@@ -17,6 +17,7 @@
 		"bin-debug/Orbit.js",
 		"bin-debug/Player.js",
 		"bin-debug/Score.js",
+		"bin-debug/Timer.js",
 		"bin-debug/Util.js"
 	]
 }

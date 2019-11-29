@@ -16,6 +16,7 @@ class Util{
         return min + Math.random() * (max - min);
     }
 
+    // minからmax(も含む)
     static randomInt(min:number, max:number):number {
         return Math.floor( min + Math.random() * (max+0.999 - min) );
     }

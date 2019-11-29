@@ -21,7 +21,7 @@ class GameOver extends GameObject{
             window.localStorage.setItem("bestScore", Score.I.score.toFixed() ); // string
         }*/
 
-        GameObject.display.once(egret.TouchEvent.TOUCH_TAP, (e: egret.TouchEvent) => this.tap(e), this);
+        //GameObject.display.once(egret.TouchEvent.TOUCH_TAP, (e: egret.TouchEvent) => this.tap(e), this);
     }
 
     onDestroy() {
@@ -32,8 +32,8 @@ class GameOver extends GameObject{
     }
     
     updateContent() {
-        GameObject.display.addChild( this.textGameOver );
-        GameObject.display.addChild( this.textScore );
+        //GameObject.display.addChild( this.textGameOver );
+        //GameObject.display.addChild( this.textScore );
 
      }
 

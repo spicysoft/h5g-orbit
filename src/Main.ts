@@ -32,12 +32,10 @@ class Game{
         /* new メソッドを記入*/
         new Background();
         new Score();
+        new Timer();
         new Orbit();
-        new Player();
-        
+        new Player();   
     }
-
-
 }
 
 
@@ -47,7 +45,8 @@ class Background extends GameObject{
         super();
 
         this.shape = new egret.Shape();
-        this.shape.graphics.beginFill(Util.color(5,55,155));
+        //this.shape.graphics.beginFill(Util.color(5,55,155));
+        this.shape.graphics.beginFill(Util.color(5,5,15));
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);

@@ -13,7 +13,7 @@ class Score extends GameObject{
     constructor() {
         super();
 
-        this.textColor = Util.color(0,0,255);
+        this.textColor = Util.color(0,200,255);
 
         Score.I = this;
         this.score = 0;
