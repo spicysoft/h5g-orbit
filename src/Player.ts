@@ -10,7 +10,6 @@ class Player extends GameObject
     private isTouch : boolean = false;
     private angSpd : number = 0;
     private angAcc : number = 0;
-    private framRate : number = 1/60;
     private baseSpd : number = 0;
 
     constructor() {
@@ -87,7 +86,6 @@ class Player extends GameObject
 
 
 
-
     updateContent()
     {
         if( this.isTouch ){
@@ -103,7 +101,7 @@ class Player extends GameObject
             }
         }
 
-        this.ang += this.angSpd * this.framRate;
+        this.ang += this.angSpd * Game.fps;
         if( this.ang > Math.PI*2 ){
             this.ang -= Math.PI*2;
         }

@@ -6,7 +6,7 @@ class Main extends eui.UILayer {
     }
  
     private addToStage() {
-
+        this.stage.frameRate = 60;
         GameObject.initial( this.stage );
         Util.init(this);
         Game.init();
@@ -20,21 +20,24 @@ class Main extends eui.UILayer {
 
 }
 
-class Game{
-
+class Game
+{
     public static height: number;
     public static width: number;
+    public static fps: number;
 
     static init() {
         this.height = egret.MainContext.instance.stage.stageHeight;
         this.width  = egret.MainContext.instance.stage.stageWidth;
-        
+        this.fps = 1 / egret.MainContext.instance.stage.frameRate;
+
         /* new メソッドを記入*/
         new Background();
         new Score();
         new Timer();
         new Orbit();
-        new Player();   
+        new Player();
+        new ObstacleGen();
     }
 }
 
@@ -46,7 +49,7 @@ class Background extends GameObject{
 
         this.shape = new egret.Shape();
         //this.shape.graphics.beginFill(Util.color(5,55,155));
-        this.shape.graphics.beginFill(Util.color(5,5,15));
+        this.shape.graphics.beginFill(Util.color(128,128,128));
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);
