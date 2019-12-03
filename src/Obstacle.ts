@@ -28,6 +28,8 @@ class Obstacle extends GameObject
 
         this.shape.graphics.lineStyle( 2, 0xffffff );
         this.shape.graphics.drawRect( -size/2, -size/2, size, size );
+        //this.shape.blendMode = egret.BlendMode.ADD;
+
         GameObject.display.addChild( this.shape );
         
     }

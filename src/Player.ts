@@ -35,6 +35,9 @@ class Player extends GameObject
 
         egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
         egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
+
+
+        new Button( this.onTapped );
     }
 
     onDestroy() {
@@ -43,6 +46,9 @@ class Player extends GameObject
         Player.I = null;
     }
 
+    onTapped(){
+        new GameOver();
+    }
 
     private touchHandler( evt:egret.TouchEvent ){
         switch ( evt.type ){
@@ -80,6 +86,8 @@ class Player extends GameObject
         this.shape.graphics.drawCircle(0, 0, radius);
         //this.shape.graphics.drawRect(0, 0, 30 , 30);
         this.shape.graphics.endFill();
+        //this.shape.blendMode = egret.BlendMode.ADD;
+        
         GameObject.display.addChild(this.shape);
         
     }
@@ -88,6 +96,9 @@ class Player extends GameObject
 
     updateContent()
     {
+        if( GameManager.I.pause )
+            return;
+
         if( this.isTouch ){
             this.angSpd -= this.angAcc;
             if( this.angSpd < Math.PI*0.1 ){

@@ -1,67 +1,70 @@
 class Button extends GameObject
 {
-    text:egret.TextField = null;
-    onTap:()=>void = null;
+    private isTapped : boolean = false;
+    private onTapped : ()=>void = null;
+    private text : egret.TextField = null;
 
-    press:boolean = false;
-    touch:boolean = false;
-    x:number = 0;
-    y:number = 0;
-
-    constructor( text:string, fontsize:number, fontRGB:number, xRatio:number, yRatio:number, wRatio:number, hRatio:number, rgb:number, alpha:number, onTap:()=>void ) {
+    constructor( onTappedHandler:()=>void )
+    {
         super();
 
-        let shape = new egret.Shape();
-        GameObject.display.addChild(shape);
-        shape.graphics.beginFill( rgb, alpha );
-        let w = wRatio * Util.width;
-        let h = hRatio * Util.height;
-        shape.graphics.drawRoundRect(-0.5*w, -0.5*h, w, h, w*0.2);
-        shape.graphics.endFill();
-        shape.touchEnabled = true;
-        shape.x = xRatio * Util.width;
-        shape.y = yRatio * Util.height;
+        this.onTapped = onTappedHandler;
+        
+        this.shape = new egret.Shape();
+        this.shape.x = 200;
+        this.shape.y = 100;
 
+        //this.shape.graphics.beginFill(0xf0f0f0);
+        this.shape.graphics.beginFill(0x0000f0);
+        this.shape.graphics.drawRoundRect(0, 0, 180 , 60, 16);
+        this.shape.graphics.endFill();
+        this.shape.touchEnabled = true;
+        
+        GameObject.displayF.addChild( this.shape );
 
-        if( text ){
-            this.text = Util.myText(shape.x, shape.y, text, 50, 0.5, fontRGB, false);
-            GameObject.display.addChild( this.text );
+        this.text = Util.myText(200+90, 100+30, "button", 30, 1, 0x000000, false, true);
+
+        GameObject.display.addChild( this.text );
+
+        this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, this.touchHandler, this )
+    }
+
+    onDestroy()
+    {
+        GameObject.display.removeChild( this.shape );
+        GameObject.display.removeChild( this.text );
+        this.shape = null;
+        this.text = null;
+    }
+    
+    private touchHandler( evt:egret.TouchEvent ){
+        switch ( evt.type ){
+            case egret.TouchEvent.TOUCH_TAP:
+                //let x = evt.stageX;
+                //let y = evt.stageY;
+                //if( this.shape.hitTestPoint(x,y) ){
+                    this.isTapped = true;
+                    //console.log("touch tap " + x + ", " + y);
+                //}
+                break;
+            case egret.TouchEvent.TOUCH_MOVE:
+                break;
+            case egret.TouchEvent.TOUCH_BEGIN:
+                break;
+            case egret. TouchEvent.TOUCH_END:
+                break;
         }
-        this.onTap = onTap;
-        if( this.onTap ) GameObject.display.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTap, this);
-        GameObject.display.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this);
-        GameObject.display.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
-        GameObject.display.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
     }
+    
+    updateContent()
+    {
+        if( this.isTapped ){
+            this.isTapped = false;
+            if( this.onTapped ){
+                this.onTapped();
+            }
+            //egret.log("tapped");
+        }
 
-    onDestroy(){
-        if( this.onTap ) GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTap, this);
-        GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this);
-        GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
-        GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
-
-        if( this.text ) GameObject.display.removeChild( this.text );
-    }
-
-    updateContent() {
-        //let scale = this.touch ? 1.1 : 1.0;
-        //this.display.scaleX = this.display.scaleY = ( this.display.scaleX + (scale - this.display.scaleX) * 0.25 );
-        this.press = false;
-    }
-
-    // touch
-    touchBegin(e:egret.TouchEvent) {
-        this.x = e.stageX;
-        this.y = e.stageY;
-        this.press = true;
-        this.touch = true;
-    }
-    touchMove(e:egret.TouchEvent) {
-        this.x = e.stageX;
-        this.y = e.stageY;
-        this.touch = true;
-    }
-    touchEnd(e:egret.TouchEvent) {
-        this.touch = false;
     }
 }

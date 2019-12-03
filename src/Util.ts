@@ -52,9 +52,11 @@ class Util{
 
 
 
-    static myText(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean): egret.TextField {
+    static myText(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean, isCentering:boolean=false): egret.TextField {
         
         let tf :egret.TextField = new egret.TextField();
+
+
         tf.x = x;
         tf.y = y;
         tf.text = text;
@@ -66,6 +68,10 @@ class Util{
 
         tf.textColor = color;
 
+        if( isCentering ){
+            tf.anchorOffsetX = 0.5*tf.width;
+            tf.anchorOffsetY = 0.5*tf.height;
+        }
 
         return tf;
     }

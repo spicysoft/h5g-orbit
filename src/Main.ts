@@ -33,11 +33,13 @@ class Game
 
         /* new メソッドを記入*/
         new Background();
+        new GameManager();
         new Score();
         new Timer();
         new Orbit();
         new Player();
         new ObstacleGen();
+        //new Button();
     }
 }
 

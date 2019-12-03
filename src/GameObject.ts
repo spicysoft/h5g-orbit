@@ -13,7 +13,8 @@ abstract class GameObject {
     public static display: egret.DisplayObjectContainer;
     public static transit:()=>void;
     protected destroyFlag : boolean = false;
-
+    public static displayF: egret.DisplayObjectContainer;
+    
     constructor() {
         GameObject.objects.push(this);
     }
@@ -22,6 +23,16 @@ abstract class GameObject {
     static initial(displayObjectContainer: egret.DisplayObjectContainer){
         GameObject.objects = [];
         GameObject.display = displayObjectContainer;
+
+        GameObject.displayF = new egret.DisplayObjectContainer();
+        GameObject.displayF.x = 0;
+        GameObject.displayF.y = 0;
+        GameObject.displayF.anchorOffsetX = 0;
+        GameObject.displayF.anchorOffsetY = 0;
+        GameObject.displayF.scaleX = 1;
+        GameObject.displayF.scaleY = 1;
+        GameObject.display.addChild( GameObject.displayF );
+
     }
 
     abstract updateContent() : void;
