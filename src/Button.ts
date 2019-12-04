@@ -3,27 +3,30 @@ class Button extends GameObject
     private isTapped : boolean = false;
     private onTapped : ()=>void = null;
     private text : egret.TextField = null;
+    static uiIndex : number = 0;
 
     constructor( onTappedHandler:()=>void )
     {
         super();
 
+        Button.uiIndex = GameObject.display.numChildren;
+        //egret.log(Button.uiIndex);
+
         this.onTapped = onTappedHandler;
         
         this.shape = new egret.Shape();
         this.shape.x = 200;
-        this.shape.y = 100;
+        this.shape.y = 160;
 
-        //this.shape.graphics.beginFill(0xf0f0f0);
-        this.shape.graphics.beginFill(0x0000f0);
+        this.shape.graphics.beginFill(0xf0f0f0);
+        //this.shape.graphics.beginFill(0x0000f0);
         this.shape.graphics.drawRoundRect(0, 0, 180 , 60, 16);
         this.shape.graphics.endFill();
         this.shape.touchEnabled = true;
-        
-        GameObject.displayF.addChild( this.shape );
+        GameObject.display.addChild( this.shape );
+        Button.uiIndex = GameObject.display.numChildren;
 
-        this.text = Util.myText(200+90, 100+30, "button", 30, 1, 0x000000, false, true);
-
+        this.text = Util.myText(200+90, 160+30, "button", 30, 1, 0x000000, false, true);
         GameObject.display.addChild( this.text );
 
         this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, this.touchHandler, this )

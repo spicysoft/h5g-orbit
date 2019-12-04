@@ -1,12 +1,19 @@
 class Orbit extends GameObject
 {
-    //static I:Orbit = null;   // singleton instance
-    private radius :number =null;
+    static AreaMinX : number = 0;
+    static AreaMaxX : number = 0;
+    static AreaMinY : number = 0;
+    static AreaMaxY : number = 0;
+
+    private radius :number;
 
     constructor() {
         super();
 
-        //Orbit.I = this;
+        Orbit.AreaMinX = 0.5*Game.width - 200;
+        Orbit.AreaMaxX = 0.5*Game.width + 200;
+        Orbit.AreaMinY = 0.5*Game.height - 200;
+        Orbit.AreaMaxY = 0.5*Game.height + 200;
 
         this.setShape(0.5*Game.width, 0.5*Game.height, 160);
     }
@@ -16,7 +23,8 @@ class Orbit extends GameObject
         this.shape = null;
     }
 
-    setShape(x: number, y:number, radius: number){
+    setShape(x: number, y:number, radius: number)
+    {
         if( this.shape ){
             GameObject.display.removeChild(this.shape);        
         }
@@ -25,19 +33,12 @@ class Orbit extends GameObject
         this.shape.x = x;
         this.shape.y = y;
 
-        this.shape.graphics.lineStyle(2, 0xffffff);
-        //this.shape.graphics.beginFill(0xff0000);
+        this.shape.graphics.lineStyle(1, 0xf0f0f0);
         this.shape.graphics.drawCircle(0, 0, radius);
-        //this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);
-        
     }
-
-
 
 
     updateContent(){
     }
-
-
 }

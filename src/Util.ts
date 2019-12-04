@@ -67,6 +67,7 @@ class Util{
         tf.scaleY = ratio;
 
         tf.textColor = color;
+        //tf.fontFamily = "Arial";
 
         if( isCentering ){
             tf.anchorOffsetX = 0.5*tf.width;

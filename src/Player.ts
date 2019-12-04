@@ -3,7 +3,7 @@ class Player extends GameObject
     static I:Player = null;   // singleton instance
     //private radius :number =null;
     private center : egret.Point = null;
-    private pos : egret.Point = null;
+    public pos : egret.Point = null;
     private prePos : egret.Point = null;
     private ang : number = 0;
     private rad : number = 160;
@@ -11,6 +11,7 @@ class Player extends GameObject
     private angSpd : number = 0;
     private angAcc : number = 0;
     private baseSpd : number = 0;
+
 
     constructor() {
         super();
