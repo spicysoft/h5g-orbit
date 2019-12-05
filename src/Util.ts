@@ -52,10 +52,9 @@ class Util{
 
 
 
-    static myText(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean, isCentering:boolean=false): egret.TextField {
-        
+    static myText(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean, isCentering:boolean=false): egret.TextField
+    {
         let tf :egret.TextField = new egret.TextField();
-
 
         tf.x = x;
         tf.y = y;

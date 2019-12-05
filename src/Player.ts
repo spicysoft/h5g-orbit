@@ -38,6 +38,7 @@ class Player extends GameObject
         egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
 
 
+        
         new Button( this.onTapped );
     }
 
@@ -49,6 +50,7 @@ class Player extends GameObject
 
     onTapped(){
         new GameOver();
+        //GameObject.transit = Game.init;
     }
 
     private touchHandler( evt:egret.TouchEvent ){
@@ -116,6 +118,8 @@ class Player extends GameObject
         this.ang += this.angSpd * Game.fps;
         if( this.ang > Math.PI*2 ){
             this.ang -= Math.PI*2;
+            // スコア.
+            Score.I.addScore();
         }
 
 

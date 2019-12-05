@@ -26,7 +26,7 @@ class Button extends GameObject
         GameObject.display.addChild( this.shape );
         Button.uiIndex = GameObject.display.numChildren;
 
-        this.text = Util.myText(200+90, 160+30, "button", 30, 1, 0x000000, false, true);
+        this.text = Util.myText(200+90, 160+30, "BUTTON", 60, 0.5, 0x000000, false, true);
         GameObject.display.addChild( this.text );
 
         this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, this.touchHandler, this )

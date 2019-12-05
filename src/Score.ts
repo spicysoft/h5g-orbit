@@ -13,11 +13,11 @@ class Score extends GameObject{
     constructor() {
         super();
 
-        this.textColor = Util.color(0,200,255);
+        this.textColor = Util.color(250,250,255);
 
         Score.I = this;
         this.score = 0;
-        this.text = Util.myText(0, 0, "score : 0", 50, 0.5, this.textColor, false);
+        this.text = Util.myText(0, 0, "SCORE : 0", 50, 0.5, this.textColor, false);
         GameObject.display.addChild( this.text );
 
         /*let bestScore = window.localStorage.getItem("bestScore"); // string
@@ -38,17 +38,17 @@ class Score extends GameObject{
     }
 
     updateContent() {
+    }
+
+    addScore()
+    {
+        this.score += 100;
         this.text.text = "SCORE : " + this.score.toFixed();
-        
+
         if( this.bestScore < this.score ){
             this.bestScore = this.score;
             //this.textBest.text = "BEST : " + this.score.toFixed();
-        }
-    }
-
-    addScore(){
-        this.score += 1;
-        
+        }     
     }
 
 

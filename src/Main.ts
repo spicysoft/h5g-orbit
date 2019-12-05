@@ -38,6 +38,7 @@ class Game
         new Timer();
         new Orbit();
         new Player();
+        new Life();
         new ObstacleGen();
         //new Button();
     }

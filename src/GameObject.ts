@@ -24,14 +24,14 @@ abstract class GameObject {
         GameObject.objects = [];
         GameObject.display = displayObjectContainer;
 
-        GameObject.displayF = new egret.DisplayObjectContainer();
-        /*GameObject.displayF.x = 0;
+        /*GameObject.displayF = new egret.DisplayObjectContainer();
+        GameObject.displayF.x = 0;
         GameObject.displayF.y = 0;
         GameObject.displayF.anchorOffsetX = 0;
         GameObject.displayF.anchorOffsetY = 0;
         GameObject.displayF.scaleX = 1;
-        GameObject.displayF.scaleY = 1;*/
-        GameObject.display.addChild( GameObject.displayF );
+        GameObject.displayF.scaleY = 1;
+        GameObject.display.addChild( GameObject.displayF );*/
 
     }
 
@@ -56,6 +56,9 @@ abstract class GameObject {
     }
 
     static allDestroy(){
+
+        egret.log("obj num "+GameObject.objects.length);
+
         GameObject.objects = GameObject.objects.filter( obj => {
             obj.destroy();
             obj.delete();
@@ -67,15 +70,17 @@ abstract class GameObject {
     destroy() { this.destroyFlag = true; }
     
     //shapeの削除など、destroy後に後処理が必要なら記述
-    addDestroyMethod(){}
+    onDestroy(){}
 
     private delete(){
-        this.addDestroyMethod();
+        this.onDestroy();
+
+        /*
         if( this.shape ){
             GameObject.display.removeChild(this.shape);
             //this.shape.parent.removeChild(this.shape);
             this.shape = null;
-        }
+        }*/
     }
 
 }

@@ -49,6 +49,8 @@ class Obstacle extends GameObject
 
         if( this.checkColli( pos, next ) ){
             this.destroy();
+            // ダメージ.
+            Life.I.subLife();
             return;
         }
 
