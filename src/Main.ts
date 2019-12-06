@@ -40,7 +40,6 @@ class Game
         new Player();
         new Life();
         new ObstacleGen();
-        //new Button();
     }
 }
 
@@ -59,7 +58,13 @@ class Background extends GameObject{
     }
     
     updateContent() {}
+
+    onDestroy() {
+        GameObject.display.removeChild( this.shape );
+        this.shape = null;
+    }
 }
+
 /*
 class CreateWorld extends PhysicsObject{
 

@@ -41,6 +41,10 @@ class Obstacle extends GameObject
 
     updateContent()
     {
+        if( GameManager.I.pause ){
+            return;
+        }
+
         this.shape.rotation += 360 * Game.fps;
         this.shape.y += this.speed * Game.fps;
 
@@ -49,6 +53,8 @@ class Obstacle extends GameObject
 
         if( this.checkColli( pos, next ) ){
             this.destroy();
+            // effect.
+            new DamageEffect( Player.I.pos.x, Player.I.pos.y );
             // ダメージ.
             Life.I.subLife();
             return;

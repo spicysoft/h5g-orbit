@@ -1,10 +1,9 @@
 class Player extends GameObject
 {
-    static I:Player = null;   // singleton instance
-    //private radius :number =null;
+    static I : Player = null;   // singleton instance
     private center : egret.Point = null;
     public pos : egret.Point = null;
-    private prePos : egret.Point = null;
+    public prePos : egret.Point = null;
     private ang : number = 0;
     private rad : number = 160;
     private isTouch : boolean = false;
@@ -27,6 +26,7 @@ class Player extends GameObject
         this.pos.y = 0;
 
         this.pos = this.pos.add(this.center);
+        this.prePos = this.pos;
 
         this.setShape(this.pos.x, this.pos.y, 16);
 
@@ -34,23 +34,14 @@ class Player extends GameObject
         this.angSpd = this.baseSpd;
         this.angAcc = Math.PI*0.01;
 
-        egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
-        egret.MainContext.instance.stage.addEventListener( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
-
-
-        
-        new Button( this.onTapped );
+        GameObject.display.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
+        GameObject.display.addEventListener( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
     }
 
     onDestroy() {
         GameObject.display.removeChild( this.shape );
         this.shape = null;
         Player.I = null;
-    }
-
-    onTapped(){
-        new GameOver();
-        //GameObject.transit = Game.init;
     }
 
     private touchHandler( evt:egret.TouchEvent ){
@@ -75,7 +66,7 @@ class Player extends GameObject
     }
     
 
-    setShape(x: number, y:number, radius: number)
+    setShape(x:number, y:number, radius: number)
     {
         if( this.shape ){
             GameObject.display.removeChild(this.shape);        
@@ -92,16 +83,15 @@ class Player extends GameObject
         //this.shape.blendMode = egret.BlendMode.ADD;
         
         GameObject.display.addChild(this.shape);
-        
     }
-
 
 
     updateContent()
     {
-        if( GameManager.I.pause )
+        if( GameManager.I.pause ){
             return;
-
+        }
+        
         if( this.isTouch ){
             this.angSpd -= this.angAcc;
             if( this.angSpd < Math.PI*0.1 ){
@@ -122,6 +112,7 @@ class Player extends GameObject
             Score.I.addScore();
         }
 
+        this.prePos = this.pos;
 
         let nextPos = new egret.Point();
         nextPos.x = Math.cos( this.ang ) * this.rad;

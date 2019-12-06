@@ -5,7 +5,7 @@ class ObstacleGen extends GameObject
     private timer : egret.Timer = null;
     //static num : number = 0;
 
-    private reqGen : boolean = false;
+    private reqGen : number = 0;
 
     constructor() {
         super();
@@ -15,14 +15,13 @@ class ObstacleGen extends GameObject
 
         //egret.log("ObstacleGen "+ObstacleGen.num.toString());
 
-        this.timer = new egret.Timer(2000, 0);
+        this.timer = new egret.Timer(1000, 0);
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         this.timer.start();
 
     }
 
     onDestroy() {
-        egret.log(" on destroy ObstacleGen");
         this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         this.timer = null;
         ObstacleGen.I = null;
@@ -31,19 +30,21 @@ class ObstacleGen extends GameObject
 
     private timerFunc(event: egret.Event)
     {
-        let rndNum = 1;//Util.randomInt( 1, 3 );
-        for( let i = 0; i < rndNum; i++ ){
-            //new Obstacle();
-            this.reqGen = true;
-        }
+        this.reqGen = Util.randomInt( 1, 3 );
     }
 
 
     updateContent()
     {
-        if( this.reqGen ){
-            this.reqGen = false;
-            new Obstacle();
+        if( GameManager.I.pause ){
+            return;
+        }
+
+        if( this.reqGen > 0 ){
+            for( let i = 0; i < this.reqGen; i++ ){
+                new Obstacle();
+            }
+            this.reqGen = 0;
         }
     }
 

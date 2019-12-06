@@ -1,3 +1,6 @@
+
+const DefLife = 3;
+
 class Life extends GameObject
 {
     static I:Life = null;   // singleton instance
@@ -12,8 +15,8 @@ class Life extends GameObject
         this.textColor = Util.color(250,250,255);
 
         Life.I = this;
-        this.life = 3;
-        this.text = Util.myText(200, 0, "Life : 3", 50, 0.5, this.textColor, false);
+        this.life = DefLife;
+        this.text = Util.myText(200, 0, "Life : "+this.life.toString(), 50, 0.5, this.textColor, false);
         GameObject.display.addChild( this.text );
 
     }
@@ -31,6 +34,8 @@ class Life extends GameObject
         this.life -= 1;
         if( this.life <= 0 ){
             this.life = 0;
+            GameManager.I.pause = true;
+            new GameOver();
         }
 
         this.text.text = "Life : " + this.life.toFixed();

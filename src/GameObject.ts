@@ -57,7 +57,7 @@ abstract class GameObject {
 
     static allDestroy(){
 
-        egret.log("obj num "+GameObject.objects.length);
+        //egret.log("obj num "+GameObject.objects.length);
 
         GameObject.objects = GameObject.objects.filter( obj => {
             obj.destroy();

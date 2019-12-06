@@ -12,6 +12,7 @@
 		"bin-debug/GameObject.js",
 		"bin-debug/Main.js",
 		"bin-debug/Button.js",
+		"bin-debug/DamageEffect.js",
 		"bin-debug/GameManager.js",
 		"bin-debug/Ball.js",
 		"bin-debug/GameOver.js",
