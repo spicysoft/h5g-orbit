@@ -2,9 +2,8 @@ class Score extends GameObject{
 
     static I:Score = null;   // singleton instance
 
+    static bestScore:number = 0;
     score:number = 0;
-
-    bestScore:number = 0;
     text:egret.TextField = null;
     textBest:egret.TextField = null;
 
@@ -26,7 +25,7 @@ class Score extends GameObject{
             window.localStorage.setItem("bestScore", bestScore);
         }*/
         //this.bestScore = 0;//parseInt( bestScore );
-        //this.textBest = Util.myText(0, 50, "BEST : " + this.bestScore, 100, 0.5, this.textColor, true);
+        //this.textBest = Util.myText(0, 50, "BEST : " + Score.bestScore, 50, 0.5, this.textColor, false);
         //GameObject.display.addChild( this.textBest );
     }
     
@@ -45,11 +44,9 @@ class Score extends GameObject{
         this.score += 100;
         this.text.text = "SCORE : " + this.score.toFixed();
 
-        if( this.bestScore < this.score ){
-            this.bestScore = this.score;
-            //this.textBest.text = "BEST : " + this.score.toFixed();
+        if( Score.bestScore < this.score ){
+            Score.bestScore = this.score;
+            //this.textBest.text = "BEST : " + Score.bestScore.toFixed();
         }     
     }
-
-
 }

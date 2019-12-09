@@ -5,6 +5,19 @@ class Obstacle extends GameObject
     private speed : number;
     private dist : number;
 
+    constructor( x:number, y:number, vel:egret.Point ) {
+        super();
+
+        this.dist = 0;
+        this.speed = Util.randomInt( 200, 300 ) * Game.fps;
+
+        this.velocity = new egret.Point( vel.x, vel.y );
+        this.velocity.x *= this.speed;
+        this.velocity.y *= this.speed;
+
+        this.setShape( x, y, 20 );
+    }
+/*
     constructor() {
         super();
 
@@ -21,7 +34,7 @@ class Obstacle extends GameObject
         let rndX = Util.random( minx/20, maxx/20 ) * 20;
         this.setShape( rndX, 1100, 20 );
     }
-
+*/
     onDestroy() {
         GameObject.display.removeChild( this.shape );
         this.shape = null;
