@@ -6,7 +6,7 @@ class DamageEffect extends GameObject
     constructor( x:number, y:number ) {
         super();
         this.radius = 15;
-        this.setShape( x, y, 15 );
+        this.setShape( x, y, 32 );
     }
 
     onDestroy() {
@@ -43,8 +43,10 @@ class DamageEffect extends GameObject
             return;
         }
 
-        this.shape.x = Player.I.prePos.x;
-        this.shape.y = Player.I.prePos.y;
+        //this.shape.x = Player.I.prePos.x;
+        //this.shape.y = Player.I.prePos.y;
+        this.shape.x = Player.I.pos.x;
+        this.shape.y = Player.I.pos.y;
 
         this.shape.rotation -= 360 * 2 * Game.fps;
 

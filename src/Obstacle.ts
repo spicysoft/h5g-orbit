@@ -1,14 +1,25 @@
 class Obstacle extends GameObject
 {
     private radius : number;
+    private velocity : egret.Point;
     private speed : number;
+    private dist : number;
 
     constructor() {
         super();
 
-        this.speed = Util.randomInt( 200, 300 );
-        let rndX = Util.randomInt( 100, 500 );
-        this.setShape( rndX, 100, 20 );
+        this.dist = 0;
+        this.speed = Util.randomInt( 200, 300 ) * Game.fps;
+
+        this.velocity = new egret.Point();
+        this.velocity.x = 0;
+        this.velocity.y = -this.speed;
+
+        let minx = Game.width / 2 - 160 - 40;
+        let maxx = Game.width / 2 + 160 + 40;
+        //let rndX = Util.randomInt( minx, maxx );
+        let rndX = Util.random( minx/20, maxx/20 ) * 20;
+        this.setShape( rndX, 1100, 20 );
     }
 
     onDestroy() {
@@ -46,10 +57,9 @@ class Obstacle extends GameObject
         }
 
         this.shape.rotation += 360 * Game.fps;
-        this.shape.y += this.speed * Game.fps;
 
         let pos = new egret.Point( this.shape.x, this.shape.y );
-        let next = new egret.Point( this.shape.x, this.shape.y + this.speed * Game.fps );
+        let next = pos.add( this.velocity );
 
         if( this.checkColli( pos, next ) ){
             this.destroy();
@@ -60,8 +70,11 @@ class Obstacle extends GameObject
             return;
         }
 
-
-        if( this.shape.y > 1000 ){
+        this.shape.x = next.x;
+        this.shape.y = next.y;
+        
+        this.dist += this.speed;
+        if( this.dist > 1000 ){
             this.destroy();
         }
     }
