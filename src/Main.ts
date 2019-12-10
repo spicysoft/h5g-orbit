@@ -35,7 +35,7 @@ class Game
         new Background();
         new GameManager();
         new Score();
-        new Timer();
+        //new Timer();
         new Orbit();
         new Player();
         new Life();

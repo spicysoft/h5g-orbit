@@ -19,6 +19,8 @@ class Timer extends GameObject
     onDestroy() {
         GameObject.display.removeChild( this.text );
         this.text = null;
+        this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
+        this.timer = null;
     }
 
     updateContent(){

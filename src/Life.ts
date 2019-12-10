@@ -1,5 +1,5 @@
 
-const DefLife = 3;
+const DefLife = 13;
 
 class Life extends GameObject
 {

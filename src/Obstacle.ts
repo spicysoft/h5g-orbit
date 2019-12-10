@@ -9,7 +9,8 @@ class Obstacle extends GameObject
         super();
 
         this.dist = 0;
-        this.speed = Util.randomInt( 200, 300 ) * Game.fps;
+        //this.speed = Util.randomInt( 200, 300 ) * Game.fps;
+        this.speed = 200 * Game.fps;
 
         this.velocity = new egret.Point( vel.x, vel.y );
         this.velocity.x *= this.speed;
