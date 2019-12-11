@@ -10,21 +10,23 @@
 	],
 	"game": [
 		"bin-debug/GameObject.js",
-		"bin-debug/Main.js",
+		"bin-debug/Obstacle.js",
 		"bin-debug/Button.js",
 		"bin-debug/DamageEffect.js",
 		"bin-debug/GameManager.js",
 		"bin-debug/Ball.js",
 		"bin-debug/GameOver.js",
 		"bin-debug/Life.js",
+		"bin-debug/Main.js",
 		"bin-debug/Box.js",
-		"bin-debug/Obstacle.js",
 		"bin-debug/ObstacleGen.js",
 		"bin-debug/Orbit.js",
 		"bin-debug/Player.js",
+		"bin-debug/PositiveEffect.js",
 		"bin-debug/Score.js",
 		"bin-debug/SimpleText.js",
 		"bin-debug/Timer.js",
+		"bin-debug/Title.js",
 		"bin-debug/Util.js"
 	]
 }

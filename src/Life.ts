@@ -1,5 +1,5 @@
 
-const DefLife = 13;
+const DefLife : number = 4;
 
 class Life extends GameObject
 {
@@ -14,21 +14,21 @@ class Life extends GameObject
     constructor() {
         super();
 
-        this.textColor = Util.color(250,250,255);
+        this.textColor = Util.color(255,255,255);
 
         Life.I = this;
         this.life = DefLife;
-        this.text = Util.myText(200, 0, "Life :", 50, 0.5, this.textColor, false);
+        this.text = Util.myText(300, 5, "LIFE :", 60, 0.5, this.textColor, true);
         GameObject.display.addChild( this.text );
 
-        let x = 270;
-        let y = 13;
+        let x = 110 + 300;
+        let y = 16 + 5;
         for( let i = 0; i < DefLife; i++ ){
             this.shapes[i] = new egret.Shape();
-            this.shapes[i].x = x + i * 20;
+            this.shapes[i].x = x + i * 25;
             this.shapes[i].y = y;
             this.shapes[i].graphics.beginFill(0xff0000);
-            this.shapes[i].graphics.drawCircle(0, 0, 10);
+            this.shapes[i].graphics.drawCircle(0, 0, 12);
             this.shapes[i].graphics.endFill();
             GameObject.display.addChild(this.shapes[i]);
         }
@@ -52,7 +52,7 @@ class Life extends GameObject
 
     subLife()
     {
-        this.life -= 1;
+        this.life--;
         this.shapes[this.life].visible = false;
 
         if( this.life <= 0 ){
@@ -66,7 +66,10 @@ class Life extends GameObject
 
     addLife()
     {
- 
+        if( this.life <  DefLife ){
+            this.shapes[this.life].visible = true;
+            this.life++;
+        }
     }
 
 }

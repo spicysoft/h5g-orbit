@@ -33,13 +33,13 @@ class Game
 
         /* new メソッドを記入*/
         new Background();
-        new GameManager();
         new Score();
         //new Timer();
         new Orbit();
         new Player();
         new Life();
         new ObstacleGen();
+        new GameManager();
     }
 }
 
@@ -51,7 +51,7 @@ class Background extends GameObject{
 
         this.shape = new egret.Shape();
         //this.shape.graphics.beginFill(Util.color(5,55,155));
-        this.shape.graphics.beginFill(Util.color(128,128,128));
+        this.shape.graphics.beginFill(0x888888);
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);

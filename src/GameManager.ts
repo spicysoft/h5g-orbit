@@ -1,29 +1,42 @@
 class GameManager extends GameObject
 {
     static I : GameManager = null;   // singleton instance
+    static isTitleEnd : boolean = false;
     public pause : boolean = false;
     public mode : number = 0;
     //public score : number = 0;
     public timer : egret.Timer = null;
     private text : egret.TextField = null;
-    private isStop : boolean = false;
+    //private isStop : boolean = false;
 
     constructor() {
         super();
         GameManager.I = this;
 
+        // timer
+        this.text = Util.myText(550, 5, "0", 50, 0.5, 0xffffff, false);
+        GameObject.display.addChild( this.text );
+
+
+        if( !GameManager.isTitleEnd ){
+            new Title();
+        }
+        else{
+            this.gameStart();
+        }
+    }
+
+    public gameStart()
+    {
+        this.pause = false;
+
         this.timer = new egret.Timer(1000, 0);
         //this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         this.timer.start();
 
-        this.text = Util.myText(500, 0, "time : 0", 50, 0.5, 0xffffff, false);
-        GameObject.display.addChild( this.text );
-
-        let w = 230;
-        let h = 90;
-       // new Button( "TIME", Game.width/2-w/2, Game.height/2 - 320, w, h, 0x00f0f0, 0x606060, 40, this.onButton );
-
+        ObstacleGen.I.start();
     }
+
 
     onDestroy() {
         GameObject.display.removeChild( this.text );
@@ -51,9 +64,19 @@ class GameManager extends GameObject
 
     }
 
-    updateContent()
+    onButton2()
     {
-        this.text.text = "time : " + this.timer.currentCount.toString();
+        GameManager.isTitleEnd = true;
     }
 
+    updateContent()
+    {
+        if( this.pause ){
+            return;
+        }
+        
+        if( this.text != null ){
+            this.text.text = this.timer.currentCount.toString();
+        }
+    }
 }

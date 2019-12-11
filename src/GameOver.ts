@@ -4,7 +4,7 @@ class GameOver extends GameObject{
     textScore:egret.TextField = null;
     textColor : number = 0x00c0e0;
 
-    constructor() {
+    constructor( isClear:boolean = false ) {
         super();
 
         this.shape = new egret.Shape();
@@ -13,7 +13,12 @@ class GameOver extends GameObject{
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);
 
-        this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME OVER", 100, 0.5, this.textColor, true, true);
+        if( isClear ){
+            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME CLEAR", 100, 0.5, this.textColor, true, true);
+        }
+        else{
+            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME OVER", 100, 0.5, this.textColor, true, true);        
+        }
         GameObject.display.addChild( this.textGameOver );
         
         this.textScore = Util.myText(Game.width/2, Game.height/2 - 50, "SCORE : " + Score.I.score, 90, 0.5, this.textColor, true, true);

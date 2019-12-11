@@ -4,10 +4,12 @@ class Obstacle extends GameObject
     private velocity : egret.Point;
     private speed : number;
     private dist : number;
+    private type : number;  // 1:回復
 
-    constructor( x:number, y:number, vel:egret.Point ) {
+    constructor( x:number, y:number, vel:egret.Point, type:number=0 ) {
         super();
 
+        this.type = type;
         this.dist = 0;
         //this.speed = Util.randomInt( 200, 300 ) * Game.fps;
         this.speed = 200 * Game.fps;
@@ -18,24 +20,7 @@ class Obstacle extends GameObject
 
         this.setShape( x, y, 20 );
     }
-/*
-    constructor() {
-        super();
 
-        this.dist = 0;
-        this.speed = Util.randomInt( 200, 300 ) * Game.fps;
-
-        this.velocity = new egret.Point();
-        this.velocity.x = 0;
-        this.velocity.y = -this.speed;
-
-        let minx = Game.width / 2 - 160 - 40;
-        let maxx = Game.width / 2 + 160 + 40;
-        //let rndX = Util.randomInt( minx, maxx );
-        let rndX = Util.random( minx/20, maxx/20 ) * 20;
-        this.setShape( rndX, 1100, 20 );
-    }
-*/
     onDestroy() {
         GameObject.display.removeChild( this.shape );
         this.shape = null;
@@ -51,9 +36,16 @@ class Obstacle extends GameObject
         this.shape.x = x;
         this.shape.y = y;
 
-        this.shape.graphics.lineStyle( 2, 0xffffff );
-        this.shape.graphics.drawRect( -size/2, -size/2, size, size );
-        //this.shape.blendMode = egret.BlendMode.ADD;
+        if( this.type == 0 ){
+            this.shape.graphics.lineStyle( 2, 0xffffff );
+            this.shape.graphics.drawRect( -size/2, -size/2, size, size );
+            //this.shape.blendMode = egret.BlendMode.ADD;
+        }
+        else{
+            this.shape.graphics.beginFill(0xff0000);
+            this.shape.graphics.drawCircle(0, 0, (size/2)+1);
+            this.shape.graphics.endFill();
+        }
 
         if( Button.uiIndex == 0 ){
             GameObject.display.addChild( this.shape );
@@ -77,10 +69,18 @@ class Obstacle extends GameObject
 
         if( this.checkColli( pos, next ) ){
             this.destroy();
-            // effect.
-            new DamageEffect( Player.I.pos.x, Player.I.pos.y );
-            // ダメージ.
-            Life.I.subLife();
+            if( this.type == 0 ){
+                // effect.
+                new DamageEffect( Player.I.pos.x, Player.I.pos.y );
+                // ダメージ.
+                Life.I.subLife();
+            }
+            else{
+                // effect.
+                new PositiveEffect( Player.I.pos.x, Player.I.pos.y );
+                // ライフアップ.
+                Life.I.addLife();
+            }
             return;
         }
 

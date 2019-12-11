@@ -9,7 +9,7 @@ class Button extends GameObject
     {
         super();
 
-        Button.uiIndex = GameObject.display.numChildren;
+        //Button.uiIndex = GameObject.display.numChildren;
         //egret.log(Button.uiIndex);
 
         this.onTapped = onTappedHandler;
@@ -19,17 +19,17 @@ class Button extends GameObject
         this.shape.y = y;
 
         this.shape.graphics.beginFill(backCol);
-        //this.shape.graphics.beginFill(0x0000f0);
         this.shape.graphics.drawRoundRect(0, 0, w, h, 16);
         this.shape.graphics.endFill();
         this.shape.touchEnabled = true;
         GameObject.display.addChild( this.shape );
-        Button.uiIndex = GameObject.display.numChildren;
+        //Button.uiIndex = GameObject.display.numChildren;
 
         this.text = Util.myText(x+0.5*w, y+0.5*h, label, fontSize*2, 0.5, fontCol, true, true);
         GameObject.display.addChild( this.text );
 
-        this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, this.touchHandler, this )
+        //this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, this.touchHandler, this )
+        this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, onTappedHandler, this )
     }
 
     onDestroy()
@@ -40,7 +40,7 @@ class Button extends GameObject
         this.text = null;
     }
     
-    private touchHandler( evt:egret.TouchEvent ){
+    /*private touchHandler( evt:egret.TouchEvent ){
         switch ( evt.type ){
             case egret.TouchEvent.TOUCH_TAP:
                 //let x = evt.stageX;
@@ -57,17 +57,17 @@ class Button extends GameObject
             case egret. TouchEvent.TOUCH_END:
                 break;
         }
-    }
+    }*/
     
     updateContent()
     {
+        /*
         if( this.isTapped ){
             this.isTapped = false;
             if( this.onTapped ){
                 this.onTapped();
             }
             //egret.log("tapped");
-        }
-
+        }*/
     }
 }
