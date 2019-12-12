@@ -1,3 +1,5 @@
+const DEF_ANG :number = Math.PI*0.5;
+
 class Player extends GameObject
 {
     static I : Player = null;   // singleton instance
@@ -17,20 +19,22 @@ class Player extends GameObject
 
         Player.I = this;
 
+        this.ang = DEF_ANG;
+
         this.center = new egret.Point();
         this.center.x = Game.width * 0.5;
         this.center.y = Game.height * 0.5;
 
         this.pos = new egret.Point();
-        this.pos.x = this.rad;
-        this.pos.y = 0;
+        this.pos.x = 0;
+        this.pos.y = this.rad;
 
         this.pos = this.pos.add(this.center);
         this.prePos = this.pos;
 
         this.setShape(this.pos.x, this.pos.y, 16);
 
-        this.baseSpd = Math.PI*0.6;
+        this.baseSpd = Math.PI*0.7;
         this.angSpd = this.baseSpd;
         this.angAcc = Math.PI*0.01;
 
@@ -94,8 +98,8 @@ class Player extends GameObject
         
         if( this.isTouch ){
             this.angSpd -= this.angAcc;
-            if( this.angSpd < Math.PI*0.1 ){
-                this.angSpd = Math.PI*0.1;
+            if( this.angSpd < Math.PI*0.15 ){
+                this.angSpd = Math.PI*0.15;
             }
         }
         else{
@@ -106,7 +110,7 @@ class Player extends GameObject
         }
 
         this.ang += this.angSpd * Game.fps;
-        if( this.ang > Math.PI*2 ){
+        if( this.ang > DEF_ANG+Math.PI*2 ){
             this.ang -= Math.PI*2;
             // スコア.
             Score.I.addScore();

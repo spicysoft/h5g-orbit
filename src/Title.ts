@@ -12,7 +12,7 @@ class Title extends GameObject
         Title.I = this;
 
         this.shape = new egret.Shape();
-        this.shape.graphics.beginFill(0x000000, 0.4);
+        this.shape.graphics.beginFill(0x000000, 0.5);
         this.shape.graphics.drawRect(0, Game.height/2-400, Game.width, Game.height*0.6);
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);

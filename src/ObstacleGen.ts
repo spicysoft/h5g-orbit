@@ -1,13 +1,12 @@
-const GenRepeatCnt : number = 4;    // 実際の回数＋１.
-const EndLevel : number = 3;
+
+const END_LEVEL : number = 4;
 
 class ObstacleGen extends GameObject
 {
     static I : ObstacleGen = null;   // singleton instance
     public timer : egret.Timer = null;
     public waitTimer : egret.Timer = null;
-    private textName : egret.TextField = null;
-    //private step : number = 0;
+    private textLevel : egret.TextField = null;
     private reqGen : number = 0;
     private wave : number = 0;
     private level : number = 0;
@@ -20,18 +19,9 @@ class ObstacleGen extends GameObject
 
         ObstacleGen.I = this;
 
-        //this.textName = Util.myText( Game.width/2, Game.height/2 - 300, "LEVEL : 1\nWAVE : 1", 80, 0.5, 0xf0f000, true, true );
-        //GameObject.display.addChild( this.textName );
-        /*new SimpleText("Level : 1", Game.width/2, Game.height/2 - 360, 48, 0xffff00, true, true, 3 );
-        new SimpleText("Wave : 1", Game.width/2, Game.height/2 - 300, 40, 0xffff00, true, true, 3 );
+        this.textLevel = Util.myText(10, 40, "Level 1\nWave 1", 60, 0.5, 0xc0c0c0, true, false);        
+        GameObject.display.addChild( this.textLevel );
 
-
-        this.timer = new egret.Timer(1000, GenRepeatCnt);
-        this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComplete, this);
-
-        this.timer.start();
-*/
         this.waitTimer = new egret.Timer(1000, 0);
     }
 
@@ -40,19 +30,19 @@ class ObstacleGen extends GameObject
         new SimpleText("Level : 1", Game.width/2, Game.height/2 - 360, 48, 0xffff00, true, true, 3 );
         new SimpleText("Wave : 1", Game.width/2, Game.height/2 - 300, 40, 0xffff00, true, true, 3 );
 
-        this.timer = new egret.Timer(1000, GenRepeatCnt);
-        this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComplete, this);
+        this.timer = new egret.Timer( this.getDelay(0), this.getRepeatCount(0) );
+        this.timer.addEventListener( egret.TimerEvent.TIMER, this.timerFunc, this );
+        this.timer.addEventListener( egret.TimerEvent.TIMER_COMPLETE, this.timerComplete, this );
 
         this.timer.start();
     }
 
     onDestroy()
     {
-        //GameObject.display.removeChild( this.textName );
-        //this.textName = null;
-        this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        this.timer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComplete, this);
+        GameObject.display.removeChild( this.textLevel );
+        this.textLevel = null;
+        this.timer.removeEventListener( egret.TimerEvent.TIMER, this.timerFunc, this );
+        this.timer.removeEventListener( egret.TimerEvent.TIMER_COMPLETE, this.timerComplete, this );
         this.timer = null;
         this.waitTimer = null;
         ObstacleGen.I = null;
@@ -61,7 +51,7 @@ class ObstacleGen extends GameObject
 
     private timerFunc(event: egret.Event)
     {
-        this.reqGen = this.wave + 1;
+        this.reqGen = this.getGenNum( this.wave );
         //this.reqGen = Util.randomInt( 1, 3 );
         this.stepFunc = this.generate;
     }
@@ -69,19 +59,7 @@ class ObstacleGen extends GameObject
     private timerComplete(event: egret.Event)
     {
         this.wave++;
-        this.stepFunc = this.waitWave;
-        this.waitTimer.reset();
-        this.waitTimer.start();
-    }
-
-    public timerStart()
-    {
-        this.timer.start();
-    }
-
-    public timerStop()
-    {
-        this.timer.stop();
+        this.stepFunc = this.genAndWait;
     }
 
     updateContent()
@@ -93,7 +71,90 @@ class ObstacleGen extends GameObject
         if( this.stepFunc != null ){
             this.stepFunc();
         }
+    }
 
+    getGenNum( wave:number ) : number
+    {
+        if( wave == 0 ){
+            return 1;
+        }
+        else if( wave == 1 ){
+            return 2;
+        }
+        else{
+            return Util.randomInt(2, 3);
+        }
+    }
+
+    getRepeatCount( wave:number ) : number
+    {
+        if( wave == 1 ){
+            return 8;
+        }
+        else if( wave == 2 ){
+            return 10;
+        }
+        else{
+            return 5;
+        }
+    }
+
+    getSpeed( level:number ) : number
+    {
+        switch( level ){
+        case 0:
+            return Util.random( 100, 180 );
+        case 1:
+            return Util.random( 110, 190 );
+        case 2:
+            return Util.random( 120, 200 );
+        case 3:
+            return Util.random( 150, 230 );
+        default:
+            return Util.random( 150, 230 );
+        }
+    }
+
+    getDelay( level:number ) : number
+    {
+        switch( level ){
+        case 0:
+            return 2600;
+        case 1:
+            return 2400;
+        case 2:
+            return 2200;
+        case 3:
+            return 2000;
+        default:
+            return 1500;
+        }
+    }
+
+    getRot( level:number ) : number
+    {
+        switch( level ){
+        case 0:
+            return Math.PI;
+        case 1:
+            return 0;
+        case 2:
+            if( Util.random(1,100) < 50 ){
+                return Math.PI;
+            }
+            else{
+                return 0;                
+            }
+        case 3:
+            if( Util.random(1,100) < 50 ){
+                return Math.PI*1.25;
+            }
+            else{
+                return 0;                
+            }
+        default:
+            return 0;
+        }
     }
 
     generate()
@@ -105,7 +166,7 @@ class ObstacleGen extends GameObject
 
             // 向き、速度ベクトル.
             let mat = new egret.Matrix();
-            let rot = Math.PI;
+            let rot = this.getRot( this.level );
             //let rot = Util.random( 0, 2*Math.PI );
             mat.rotate( rot );
             let vel = new egret.Point();
@@ -114,16 +175,19 @@ class ObstacleGen extends GameObject
             let startPos = new egret.Point();
             for( let i = 0; i < this.reqGen; i++ ){
 
+                // position.
                 let rndX = Util.randomInt( minx/32, maxx/32 ) * 32;
                 let basePos = new egret.Point( rndX, 600 );
                 mat.transformPoint( basePos.x, basePos.y, startPos );
                 startPos.x += Game.width/2;
                 startPos.y += Game.height/2;
-                if( i == 0 ){
-                    new Obstacle( startPos.x, startPos.y, vel, 1 );
+
+                if( Util.random(1,100) < 10 ){
+                    // 回復.
+                    new Obstacle( startPos.x, startPos.y, vel, this.getSpeed(this.level), 1 );
                 }
                 else{
-                    new Obstacle( startPos.x, startPos.y, vel );                    
+                    new Obstacle( startPos.x, startPos.y, vel, this.getSpeed(this.level) );
                 }
             }
             this.reqGen = 0;
@@ -132,19 +196,28 @@ class ObstacleGen extends GameObject
         this.stepFunc = null;
     }
 
+    genAndWait()
+    {
+        this.generate();
+
+        this.stepFunc = this.waitWave;
+        this.waitTimer.reset();
+        this.waitTimer.start();
+    }
+
     waitWave()
     {
-        if( this.waitTimer.currentCount >= 2 ){
+        if( this.waitTimer.currentCount >= 3 ){
             this.stepFunc = null;
 
             if( this.wave >= 3 ){
                 // 次のレベル.
                 this.wave = 0;
                 this.level++;
-                if( this.level < EndLevel ){
+                if( this.level < END_LEVEL ){
                     this.timer.reset();
-                    this.timer.delay = 1000;
-                    this.timer.repeatCount = GenRepeatCnt;
+                    this.timer.delay = this.getDelay( this.level );
+                    this.timer.repeatCount = this.getRepeatCount(0);
                     this.timer.start();
                     //this.textName.text = "LEVEL : " + (this.level+1).toString() + "\nWAVE : " + (this.wave+1).toString();
                     new SimpleText("Level : "+(this.level+1).toString(), Game.width/2, Game.height/2 - 360, 48, 0xffff00, true, true, 3 );
@@ -159,12 +232,14 @@ class ObstacleGen extends GameObject
             else{
                 // 次のwave.
                 this.timer.reset();
-                this.timer.delay = 1000;
-                this.timer.repeatCount += 2;
+                this.timer.delay = this.getDelay( this.level );
+                this.timer.repeatCount = this.getRepeatCount( this.wave );
                 this.timer.start();
                 //this.textName.text = "LEVEL : " + (this.level+1).toString() + "\nWAVE : " + (this.wave+1).toString();
                 new SimpleText("Wave : "+(this.wave+1).toString(), Game.width/2, Game.height/2 - 300, 40, 0xffff00, true, true, 3 );
             }
+
+            this.textLevel.text = "Level " + (this.level+1).toString() + "\nWave " + (this.wave+1).toString();
         }
     }
 }

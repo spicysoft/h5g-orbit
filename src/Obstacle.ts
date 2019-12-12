@@ -4,15 +4,17 @@ class Obstacle extends GameObject
     private velocity : egret.Point;
     private speed : number;
     private dist : number;
-    private type : number;  // 1:回復
+    private type : number;  // 0:障害物 1:回復
 
-    constructor( x:number, y:number, vel:egret.Point, type:number=0 ) {
+    constructor( x:number, y:number, vel:egret.Point, speed:number, type:number=0 )
+    {
         super();
 
         this.type = type;
         this.dist = 0;
         //this.speed = Util.randomInt( 200, 300 ) * Game.fps;
-        this.speed = 200 * Game.fps;
+        //this.speed = 200 * Game.fps;
+        this.speed = speed * Game.fps;
 
         this.velocity = new egret.Point( vel.x, vel.y );
         this.velocity.x *= this.speed;
@@ -42,8 +44,9 @@ class Obstacle extends GameObject
             //this.shape.blendMode = egret.BlendMode.ADD;
         }
         else{
+            // ライフ.
             this.shape.graphics.beginFill(0xff0000);
-            this.shape.graphics.drawCircle(0, 0, (size/2)+1);
+            this.shape.graphics.drawCircle(0, 0, (size/2)+2);
             this.shape.graphics.endFill();
         }
 
@@ -88,7 +91,7 @@ class Obstacle extends GameObject
         this.shape.y = next.y;
         
         this.dist += this.speed;
-        if( this.dist > 1000 ){
+        if( this.dist > 1200 ){
             this.destroy();
         }
     }
