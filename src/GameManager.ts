@@ -24,18 +24,6 @@ class GameManager extends GameObject
         else{
             this.gameStart();
         }
-
-
-        this.shape = new egret.Shape();
-        this.shape.x = Game.width/2;
-        this.shape.y = Game.height/2;
-        this.shape.graphics.beginFill(PLAYER_COLOR);
-        this.shape.graphics.drawCircle(0, 0, 200);
-        this.shape.graphics.endFill();
-        
-        GameObject.displayF.addChild(this.shape);
-        //GameObject.display.setChildIndex( this.shape, 2 );
-
     }
 
     public gameStart()
@@ -86,14 +74,9 @@ class GameManager extends GameObject
         if( this.pause ){
             return;
         }
-
-        GameObject.displayF.y += 1;
         
         if( this.text != null ){
-//            this.text.text = this.timer.currentCount.toString();
-            let idx = GameObject.display.getChildIndex( this.shape );
-            this.text.text = idx.toString();
-            Button.uiIndex = idx;
+            this.text.text = this.timer.currentCount.toString();
         }
     }
 }
