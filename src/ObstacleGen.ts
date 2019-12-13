@@ -1,5 +1,6 @@
 
 const END_LEVEL : number = 4;
+const GEN_YOFS : number = 550;
 
 class ObstacleGen extends GameObject
 {
@@ -52,7 +53,6 @@ class ObstacleGen extends GameObject
     private timerFunc(event: egret.Event)
     {
         this.reqGen = this.getGenNum( this.wave );
-        //this.reqGen = Util.randomInt( 1, 3 );
         this.stepFunc = this.generate;
     }
 
@@ -76,23 +76,25 @@ class ObstacleGen extends GameObject
     getGenNum( wave:number ) : number
     {
         if( wave == 0 ){
-            return 1;
+            //return 1;
+            return Util.randomInt(1, 2);
         }
         else if( wave == 1 ){
             return 2;
         }
         else{
-            return Util.randomInt(2, 3);
+            return 3;
+            //return Util.randomInt(2, 3);
         }
     }
 
     getRepeatCount( wave:number ) : number
     {
         if( wave == 1 ){
-            return 8;
+            return 5;
         }
         else if( wave == 2 ){
-            return 10;
+            return 9;
         }
         else{
             return 5;
@@ -103,15 +105,14 @@ class ObstacleGen extends GameObject
     {
         switch( level ){
         case 0:
-            return Util.random( 100, 180 );
+            return Util.random( 100, 200 );
         case 1:
-            return Util.random( 110, 190 );
+            return Util.random( 110, 220 );
         case 2:
-            return Util.random( 120, 200 );
+            return Util.random( 120, 240 );
         case 3:
-            return Util.random( 150, 230 );
         default:
-            return Util.random( 150, 230 );
+            return Util.random( 150, 300 );
         }
     }
 
@@ -119,13 +120,13 @@ class ObstacleGen extends GameObject
     {
         switch( level ){
         case 0:
-            return 2600;
+            return 2500;
         case 1:
-            return 2400;
+            return 2300;
         case 2:
-            return 2200;
+            return 2100;
         case 3:
-            return 2000;
+            return 1900;
         default:
             return 1500;
         }
@@ -150,7 +151,7 @@ class ObstacleGen extends GameObject
                 return Math.PI*1.25;
             }
             else{
-                return 0;                
+                return Math.PI;                
             }
         default:
             return 0;
@@ -177,12 +178,12 @@ class ObstacleGen extends GameObject
 
                 // position.
                 let rndX = Util.randomInt( minx/32, maxx/32 ) * 32;
-                let basePos = new egret.Point( rndX, 600 );
+                let basePos = new egret.Point( rndX, Util.random(GEN_YOFS-20, GEN_YOFS+20) );
                 mat.transformPoint( basePos.x, basePos.y, startPos );
                 startPos.x += Game.width/2;
                 startPos.y += Game.height/2;
 
-                if( Util.random(1,100) < 10 ){
+                if( Life.I.life < DEF_LIFE && Util.random(1,100) < 10 ){
                     // 回復.
                     new Obstacle( startPos.x, startPos.y, vel, this.getSpeed(this.level), 1 );
                 }

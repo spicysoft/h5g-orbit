@@ -1,5 +1,5 @@
 
-const DEF_LIFE : number = 5*2;
+const DEF_LIFE : number = 5;
 
 class Life extends GameObject
 {
@@ -27,7 +27,7 @@ class Life extends GameObject
             this.shapes[i] = new egret.Shape();
             this.shapes[i].x = x + i * 25;
             this.shapes[i].y = y;
-            this.shapes[i].graphics.beginFill(0xff0000);
+            this.shapes[i].graphics.beginFill(PLAYER_COLOR);
             this.shapes[i].graphics.drawCircle(0, 0, 12);
             this.shapes[i].graphics.endFill();
             GameObject.display.addChild(this.shapes[i]);

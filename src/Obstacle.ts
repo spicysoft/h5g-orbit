@@ -91,7 +91,7 @@ class Obstacle extends GameObject
         this.shape.y = next.y;
         
         this.dist += this.speed;
-        if( this.dist > 1200 ){
+        if( this.dist > GEN_YOFS*2 ){
             this.destroy();
         }
     }

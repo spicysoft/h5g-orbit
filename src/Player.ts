@@ -1,4 +1,5 @@
-const DEF_ANG :number = Math.PI*0.5;
+const DEF_ANG :number = Math.PI*1.5;
+const PLAYER_COLOR : number = 0xe00020;
 
 class Player extends GameObject
 {
@@ -80,7 +81,7 @@ class Player extends GameObject
         this.shape.x = x;
         this.shape.y = y;
         //this.shape.rotation = 45;
-        this.shape.graphics.beginFill(0xff0000);
+        this.shape.graphics.beginFill(PLAYER_COLOR);
         this.shape.graphics.drawCircle(0, 0, radius);
         //this.shape.graphics.drawRect(0, 0, 30 , 30);
         this.shape.graphics.endFill();
@@ -114,6 +115,7 @@ class Player extends GameObject
             this.ang -= Math.PI*2;
             // スコア.
             Score.I.addScore();
+            new SimpleText("+100", Game.width/2, Game.height/2 - 130, 28, 0xe0e0e0, true, true, 1.5 );
         }
 
         this.prePos = this.pos;

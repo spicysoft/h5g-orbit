@@ -18,7 +18,7 @@ class GameOver extends GameObject{
             this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME CLEAR", 100, 0.5, this.textColor, true, true);
         }
         else{
-            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME OVER", 100, 0.5, 0xc00000, true, true);        
+            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME OVER", 100, 0.5, 0xc00020, true, true);        
         }
         GameObject.display.addChild( this.textGameOver );
         
