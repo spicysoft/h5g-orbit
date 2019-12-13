@@ -110,7 +110,7 @@ class Player extends GameObject
             }
         }
 
-        this.ang += this.angSpd * Game.fps;
+        this.ang += this.angSpd * Game.deltaTime;
         if( this.ang > DEF_ANG+Math.PI*2 ){
             this.ang -= Math.PI*2;
             // スコア.

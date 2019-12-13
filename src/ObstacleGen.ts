@@ -178,7 +178,7 @@ class ObstacleGen extends GameObject
 
                 // position.
                 let rndX = Util.randomInt( minx/32, maxx/32 ) * 32;
-                let basePos = new egret.Point( rndX, Util.random(GEN_YOFS-20, GEN_YOFS+20) );
+                let basePos = new egret.Point( rndX, Util.random(GEN_YOFS-40, GEN_YOFS+40) );
                 mat.transformPoint( basePos.x, basePos.y, startPos );
                 startPos.x += Game.width/2;
                 startPos.y += Game.height/2;

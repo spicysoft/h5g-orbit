@@ -48,9 +48,9 @@ class DamageEffect extends GameObject
         this.shape.x = Player.I.pos.x;
         this.shape.y = Player.I.pos.y;
 
-        this.shape.rotation -= 360 * 2 * Game.fps;
+        this.shape.rotation -= 360 * 2 * Game.deltaTime;
 
-        this.radius += 160 * Game.fps;
+        this.radius += 160 * Game.deltaTime;
         this.shape.graphics.clear();
         this.shape.graphics.lineStyle( 3, 0xaf0000 );
         //this.shape.graphics.drawCircle( 0, 0, this.radius );

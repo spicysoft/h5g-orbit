@@ -14,7 +14,7 @@ class GameManager extends GameObject
         GameManager.I = this;
 
         // timer
-        this.text = Util.myText(550, 5, "0", 50, 0.5, 0xffffff, false);
+        this.text = Util.myText(550, 5, "0", 50, 0.5, 0xc0c0c0, false);
         GameObject.display.addChild( this.text );
 
 
@@ -24,6 +24,18 @@ class GameManager extends GameObject
         else{
             this.gameStart();
         }
+
+
+        this.shape = new egret.Shape();
+        this.shape.x = Game.width/2;
+        this.shape.y = Game.height/2;
+        this.shape.graphics.beginFill(PLAYER_COLOR);
+        this.shape.graphics.drawCircle(0, 0, 200);
+        this.shape.graphics.endFill();
+        
+        GameObject.displayF.addChild(this.shape);
+        //GameObject.display.setChildIndex( this.shape, 2 );
+
     }
 
     public gameStart()
@@ -42,7 +54,7 @@ class GameManager extends GameObject
         GameObject.display.removeChild( this.text );
         this.text = null;
         
-        this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
+        //this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         this.timer = null;
         GameManager.I = null;
     }
@@ -74,9 +86,14 @@ class GameManager extends GameObject
         if( this.pause ){
             return;
         }
+
+        GameObject.displayF.y += 1;
         
         if( this.text != null ){
-            this.text.text = this.timer.currentCount.toString();
+//            this.text.text = this.timer.currentCount.toString();
+            let idx = GameObject.display.getChildIndex( this.shape );
+            this.text.text = idx.toString();
+            Button.uiIndex = idx;
         }
     }
 }

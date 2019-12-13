@@ -24,15 +24,15 @@ class Game
 {
     public static height: number;
     public static width: number;
-    public static fps: number;
+    public static deltaTime: number;
 
     static init() {
         this.height = egret.MainContext.instance.stage.stageHeight;
         this.width  = egret.MainContext.instance.stage.stageWidth;
-        this.fps = 1 / egret.MainContext.instance.stage.frameRate;
+        this.deltaTime = 1 / egret.MainContext.instance.stage.frameRate;
 
         /* new メソッドを記入*/
-        new Background();
+        //new Background();
         new Score();
         //new Timer();
         new Orbit();

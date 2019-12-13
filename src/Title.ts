@@ -27,6 +27,7 @@ class Title extends GameObject
         let h = 90;
         this.button = new Button( "START", Game.width/2-w/2, Game.height/2 + 120, w, h, 0xf0f0f0, 0x606060, 40, this.onButton );
 
+        // ポーズ.
         GameManager.I.pause = true;
     }
 

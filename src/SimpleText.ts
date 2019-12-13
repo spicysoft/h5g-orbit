@@ -22,7 +22,7 @@ class SimpleText extends GameObject
 
     updateContent()
     {
-        this.timer += Game.fps;
+        this.timer += Game.deltaTime;
         if( this.lifeTime > 0 && this.timer >= this.lifeTime ){
             this.destroy();
         }

@@ -48,7 +48,7 @@ class PositiveEffect extends GameObject
         this.shape.x = Player.I.pos.x;
         this.shape.y = Player.I.pos.y;
 
-        this.radius += 100 * Game.fps;
+        this.radius += 100 * Game.deltaTime;
         this.shape.graphics.clear();
         this.shape.graphics.lineStyle( 3, 0xffff00 );
         this.shape.graphics.drawCircle( 0, 0, this.radius );

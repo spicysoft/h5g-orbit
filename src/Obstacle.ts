@@ -3,6 +3,7 @@ class Obstacle extends GameObject
     private radius : number;
     private velocity : egret.Point;
     private speed : number;
+    private rotSpeed : number;
     private dist : number;
     private type : number;  // 0:障害物 1:回復
 
@@ -14,7 +15,8 @@ class Obstacle extends GameObject
         this.dist = 0;
         //this.speed = Util.randomInt( 200, 300 ) * Game.fps;
         //this.speed = 200 * Game.fps;
-        this.speed = speed * Game.fps;
+        this.speed = speed * Game.deltaTime;
+        this.rotSpeed = (360 * speed / 200) * Game.deltaTime;
 
         this.velocity = new egret.Point( vel.x, vel.y );
         this.velocity.x *= this.speed;
@@ -45,7 +47,7 @@ class Obstacle extends GameObject
         }
         else{
             // ライフ.
-            this.shape.graphics.beginFill(0xff0000);
+            this.shape.graphics.beginFill(PLAYER_COLOR);
             this.shape.graphics.drawCircle(0, 0, (size/2)+2);
             this.shape.graphics.endFill();
         }
@@ -65,7 +67,7 @@ class Obstacle extends GameObject
             return;
         }
 
-        this.shape.rotation += 360 * Game.fps;
+        this.shape.rotation += this.rotSpeed;// 360 * Game.deltaTime;
 
         let pos = new egret.Point( this.shape.x, this.shape.y );
         let next = pos.add( this.velocity );
