@@ -20,7 +20,7 @@ class ObstacleGen extends GameObject
 
         ObstacleGen.I = this;
 
-        this.textLevel = Util.myText(10, 40, "Level 1\nWave 1", 60, 0.5, 0xc0c0c0, true, false);        
+        this.textLevel = Util.myText(30, 40, "Level 1\nWave 1", 60, 0.5, 0xc0c0c0, true, false);        
         GameObject.uiDisplay.addChild( this.textLevel );
 
         this.waitTimer = new egret.Timer(1000, 0);
@@ -105,11 +105,11 @@ class ObstacleGen extends GameObject
     {
         switch( level ){
         case 0:
-            return Util.random( 100, 200 );
-        case 1:
             return Util.random( 110, 220 );
-        case 2:
+        case 1:
             return Util.random( 120, 240 );
+        case 2:
+            return Util.random( 130, 260 );
         case 3:
         default:
             return Util.random( 150, 300 );

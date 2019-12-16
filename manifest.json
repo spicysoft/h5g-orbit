@@ -25,7 +25,6 @@
 		"bin-debug/PositiveEffect.js",
 		"bin-debug/Score.js",
 		"bin-debug/SimpleText.js",
-		"bin-debug/Timer.js",
 		"bin-debug/Title.js",
 		"bin-debug/Util.js"
 	]

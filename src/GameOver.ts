@@ -15,17 +15,17 @@ class GameOver extends GameObject{
         GameObject.uiDisplay.addChild(this.shape);
 
         if( isClear ){
-            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME CLEAR", 100, 0.5, this.textColor, true, true);
+            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 160, "GAME CLEAR", 100, 0.5, this.textColor, true, true);
         }
         else{
-            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME OVER", 100, 0.5, 0xc00020, true, true);        
+            this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 160, "GAME OVER", 100, 0.5, 0xc00020, true, true);        
         }
         GameObject.uiDisplay.addChild( this.textGameOver );
         
-        this.textScore = Util.myText(Game.width/2, Game.height/2 - 50, "SCORE : " + Score.I.score, 80, 0.5, this.textColor, true, true);
+        this.textScore = Util.myText(Game.width/2, Game.height/2 - 60, "SCORE : " + Score.I.score, 80, 0.5, this.textColor, true, true);
         GameObject.uiDisplay.addChild( this.textScore );
 
-        this.textHiScore = Util.myText(Game.width/2, Game.height/2 + 40, "HI-SCORE : " + Score.bestScore, 75, 0.5, this.textColor, true, true);
+        this.textHiScore = Util.myText(Game.width/2, Game.height/2 + 30, "HI-SCORE : " + Score.bestScore, 75, 0.5, this.textColor, true, true);
         GameObject.uiDisplay.addChild( this.textHiScore );
 
         /*if( Score.I.score >= Score.I.bestScore ){
@@ -34,7 +34,7 @@ class GameOver extends GameObject{
 
         let w = 230;
         let h = 90;
-        new Button( "RETRY", Game.width/2-w/2, Game.height/2 + 120, w, h, 0xf0f0f0, 0x606060, 40, this.onButton );
+        new Button( "RETRY", Game.width/2-w/2, Game.height/2 + 130, w, h, 0xf0f0f0, 0x606060, 40, this.onButton );
     }
 
     onDestroy() {

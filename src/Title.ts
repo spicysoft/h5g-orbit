@@ -20,7 +20,8 @@ class Title extends GameObject
         this.textTitle = Util.myText(Game.width/2, Game.height/2 - 300, "ORBIT", 100, 0.5, this.textColor, true, true);        
         GameObject.uiDisplay.addChild( this.textTitle );
         
-        this.textManual = Util.myText(Game.width/2, Game.height/2 - 180, "軌道上を周回している自機のスピード\nの調整で障害物を避ける", 60, 0.5, 0xf0f0f0, true, true);        
+        let str = "画面をタッチしている間\n赤丸のスピードがダウンします\n\n周囲から迫ってくる障害物に\nあたらないようにしてください";
+        this.textManual = Util.myText(Game.width/2, Game.height/2 - 100, str, 70, 0.5, 0xf0f0f0, true, true);        
         GameObject.uiDisplay.addChild( this.textManual );
 
         let w = 230;

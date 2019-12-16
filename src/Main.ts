@@ -34,7 +34,6 @@ class Game
         /* new メソッドを記入*/
         //new Background();
         new Score();
-        //new Timer();
         new Orbit();
         new Player();
         new Life();

@@ -16,7 +16,7 @@ class Score extends GameObject{
 
         Score.I = this;
         this.score = 0;
-        this.text = Util.myText(10, 5, "SCORE : 0", 60, 0.5, this.textColor, true);
+        this.text = Util.myText(30, 5, "SCORE : 0", 60, 0.5, this.textColor, true);
         GameObject.uiDisplay.addChild( this.text );
 
         /*let bestScore = window.localStorage.getItem("bestScore"); // string

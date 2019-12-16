@@ -5,8 +5,8 @@ class Life extends GameObject
 {
     static I:Life = null;   // singleton instance
 
-    public life:number;
-    private text:egret.TextField = null;
+    public life: number;
+    private text: egret.TextField = null;
     private textColor : number = 0xF0F0F0;
     private shapes : egret.Shape[] = new Array(DEF_LIFE);
 
@@ -18,10 +18,10 @@ class Life extends GameObject
 
         Life.I = this;
         this.life = DEF_LIFE;
-        this.text = Util.myText(300, 5, "LIFE :", 60, 0.5, this.textColor, true);
+        this.text = Util.myText(330, 5, "LIFE :", 60, 0.5, this.textColor, true);
         GameObject.uiDisplay.addChild( this.text );
 
-        let x = 100 + 300;
+        let x = 100 + 330;
         let y = 16 + 5;
         for( let i = 0; i < DEF_LIFE; i++ ){
             this.shapes[i] = new egret.Shape();
