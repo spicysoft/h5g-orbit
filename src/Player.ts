@@ -44,7 +44,7 @@ class Player extends GameObject
     }
 
     onDestroy() {
-        GameObject.display.removeChild( this.shape );
+        GameObject.gameDisplay.removeChild( this.shape );
         this.shape = null;
         Player.I = null;
     }
@@ -74,7 +74,7 @@ class Player extends GameObject
     setShape(x:number, y:number, radius: number)
     {
         if( this.shape ){
-            GameObject.display.removeChild(this.shape);        
+            GameObject.gameDisplay.removeChild(this.shape);        
         }
 
         this.shape = new egret.Shape();
@@ -87,7 +87,7 @@ class Player extends GameObject
         this.shape.graphics.endFill();
         //this.shape.blendMode = egret.BlendMode.ADD;
         
-        GameObject.display.addChild(this.shape);
+        GameObject.gameDisplay.addChild(this.shape);
     }
 
 

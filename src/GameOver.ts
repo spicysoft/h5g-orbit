@@ -12,7 +12,7 @@ class GameOver extends GameObject{
         this.shape.graphics.beginFill(0x000000, 0.5);
         this.shape.graphics.drawRect(0, Game.height*0.25, Game.width, Game.height*0.5);
         this.shape.graphics.endFill();
-        GameObject.display.addChild(this.shape);
+        GameObject.uiDisplay.addChild(this.shape);
 
         if( isClear ){
             this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME CLEAR", 100, 0.5, this.textColor, true, true);
@@ -20,19 +20,17 @@ class GameOver extends GameObject{
         else{
             this.textGameOver = Util.myText(Game.width/2, Game.height/2 - 150, "GAME OVER", 100, 0.5, 0xc00020, true, true);        
         }
-        GameObject.display.addChild( this.textGameOver );
+        GameObject.uiDisplay.addChild( this.textGameOver );
         
         this.textScore = Util.myText(Game.width/2, Game.height/2 - 50, "SCORE : " + Score.I.score, 80, 0.5, this.textColor, true, true);
-        GameObject.display.addChild( this.textScore );
+        GameObject.uiDisplay.addChild( this.textScore );
 
         this.textHiScore = Util.myText(Game.width/2, Game.height/2 + 40, "HI-SCORE : " + Score.bestScore, 75, 0.5, this.textColor, true, true);
-        GameObject.display.addChild( this.textHiScore );
+        GameObject.uiDisplay.addChild( this.textHiScore );
 
         /*if( Score.I.score >= Score.I.bestScore ){
             window.localStorage.setItem("bestScore", Score.I.score.toFixed() ); // string
         }*/
-
-        //GameObject.display.once(egret.TouchEvent.TOUCH_TAP, (e: egret.TouchEvent) => this.tap(e), this);
 
         let w = 230;
         let h = 90;
@@ -40,13 +38,13 @@ class GameOver extends GameObject{
     }
 
     onDestroy() {
-        GameObject.display.removeChild( this.shape );
+        GameObject.uiDisplay.removeChild( this.shape );
         this.shape = null;
-        GameObject.display.removeChild( this.textGameOver );
+        GameObject.uiDisplay.removeChild( this.textGameOver );
         this.textGameOver = null;
-        GameObject.display.removeChild( this.textScore );
+        GameObject.uiDisplay.removeChild( this.textScore );
         this.textScore = null;
-        GameObject.display.removeChild( this.textHiScore );
+        GameObject.uiDisplay.removeChild( this.textHiScore );
         this.textHiScore = null;
     }
     

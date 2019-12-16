@@ -21,7 +21,7 @@ class ObstacleGen extends GameObject
         ObstacleGen.I = this;
 
         this.textLevel = Util.myText(10, 40, "Level 1\nWave 1", 60, 0.5, 0xc0c0c0, true, false);        
-        GameObject.display.addChild( this.textLevel );
+        GameObject.uiDisplay.addChild( this.textLevel );
 
         this.waitTimer = new egret.Timer(1000, 0);
     }
@@ -40,7 +40,7 @@ class ObstacleGen extends GameObject
 
     onDestroy()
     {
-        GameObject.display.removeChild( this.textLevel );
+        GameObject.uiDisplay.removeChild( this.textLevel );
         this.textLevel = null;
         this.timer.removeEventListener( egret.TimerEvent.TIMER, this.timerFunc, this );
         this.timer.removeEventListener( egret.TimerEvent.TIMER_COMPLETE, this.timerComplete, this );

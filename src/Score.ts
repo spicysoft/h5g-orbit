@@ -17,7 +17,7 @@ class Score extends GameObject{
         Score.I = this;
         this.score = 0;
         this.text = Util.myText(10, 5, "SCORE : 0", 60, 0.5, this.textColor, true);
-        GameObject.display.addChild( this.text );
+        GameObject.uiDisplay.addChild( this.text );
 
         /*let bestScore = window.localStorage.getItem("bestScore"); // string
         if( bestScore == null ){
@@ -30,7 +30,7 @@ class Score extends GameObject{
     }
     
     onDestroy() {
-        GameObject.display.removeChild( this.text );
+        GameObject.uiDisplay.removeChild( this.text );
         this.text = null;
         //GameObject.display.removeChild( this.textBest );
         //this.textBest = null;

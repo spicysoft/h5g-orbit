@@ -26,14 +26,14 @@ class Obstacle extends GameObject
     }
 
     onDestroy() {
-        GameObject.display.removeChild( this.shape );
+        GameObject.gameDisplay.removeChild( this.shape );
         this.shape = null;
     }
 
     setShape( x: number, y:number, size: number )
     {
         if( this.shape ){
-            GameObject.display.removeChild(this.shape);        
+            GameObject.gameDisplay.removeChild(this.shape);        
         }
 
         this.shape = new egret.Shape();
@@ -52,12 +52,7 @@ class Obstacle extends GameObject
             this.shape.graphics.endFill();
         }
 
-        if( Button.uiIndex == 0 ){
-            GameObject.display.addChild( this.shape );
-        }
-        else{
-            GameObject.display.addChildAt( this.shape, Button.uiIndex );
-        }    
+        GameObject.gameDisplay.addChildAt( this.shape, Button.uiIndex );
     }
 
 
@@ -67,7 +62,7 @@ class Obstacle extends GameObject
             return;
         }
 
-        this.shape.rotation += this.rotSpeed;// 360 * Game.deltaTime;
+        this.shape.rotation += this.rotSpeed;
 
         let pos = new egret.Point( this.shape.x, this.shape.y );
         let next = pos.add( this.velocity );
@@ -85,6 +80,8 @@ class Obstacle extends GameObject
                 new PositiveEffect( Player.I.pos.x, Player.I.pos.y );
                 // ライフアップ.
                 Life.I.addLife();
+                // LIFE+1表示.
+                new SimpleText("LIFE+1", Player.I.pos.x, Player.I.pos.y, 28, 0xffff00, true, true, 1.5 );
             }
             return;
         }
@@ -98,6 +95,7 @@ class Obstacle extends GameObject
         }
     }
 
+    // PCとの当たり判定.
     // 参考 http://sampo.hatenadiary.jp/entry/20070626/p1#f1
     checkColli( pos:egret.Point, nxt:egret.Point ) : boolean
     {
@@ -145,6 +143,5 @@ class Obstacle extends GameObject
 
         return false;
     }
-
 
 }

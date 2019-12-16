@@ -22,11 +22,10 @@ class Button extends GameObject
         this.shape.graphics.drawRoundRect(0, 0, w, h, 16);
         this.shape.graphics.endFill();
         this.shape.touchEnabled = true;
-        GameObject.display.addChild( this.shape );
-        //Button.uiIndex = GameObject.display.numChildren;
+        GameObject.uiDisplay.addChild( this.shape );
 
         this.text = Util.myText(x+0.5*w, y+0.5*h, label, fontSize*2, 0.5, fontCol, true, true);
-        GameObject.display.addChild( this.text );
+        GameObject.uiDisplay.addChild( this.text );
 
         //this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, this.touchHandler, this )
         this.shape.addEventListener( egret.TouchEvent.TOUCH_TAP, onTappedHandler, this )
@@ -34,8 +33,8 @@ class Button extends GameObject
 
     onDestroy()
     {
-        GameObject.display.removeChild( this.shape );
-        GameObject.display.removeChild( this.text );
+        GameObject.uiDisplay.removeChild( this.shape );
+        GameObject.uiDisplay.removeChild( this.text );
         this.shape = null;
         this.text = null;
     }

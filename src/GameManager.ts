@@ -15,7 +15,7 @@ class GameManager extends GameObject
 
         // timer
         this.text = Util.myText(550, 5, "0", 50, 0.5, 0xc0c0c0, false);
-        GameObject.display.addChild( this.text );
+        GameObject.uiDisplay.addChild( this.text );
 
 
         if( !GameManager.isTitleEnd ){
@@ -39,7 +39,7 @@ class GameManager extends GameObject
 
 
     onDestroy() {
-        GameObject.display.removeChild( this.text );
+        GameObject.uiDisplay.removeChild( this.text );
         this.text = null;
         
         //this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);

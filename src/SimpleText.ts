@@ -9,14 +9,14 @@ class SimpleText extends GameObject
         super();
 
         this.text = Util.myText( x, y, label, fontSize*2, 0.5, textColor, isBold, isCentering );
-        GameObject.display.addChild( this.text );
+        GameObject.uiDisplay.addChild( this.text );
 
         this.lifeTime = lifeTime;
     }
     
     onDestroy()
     {
-        GameObject.display.removeChild( this.text );
+        GameObject.uiDisplay.removeChild( this.text );
         this.text = null;
     }
 

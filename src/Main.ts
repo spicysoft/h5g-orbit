@@ -54,13 +54,13 @@ class Background extends GameObject{
         this.shape.graphics.beginFill(0x888888);
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         this.shape.graphics.endFill();
-        GameObject.display.addChild(this.shape);
+        GameObject.gameDisplay.addChild(this.shape);
     }
     
     updateContent() {}
 
     onDestroy() {
-        GameObject.display.removeChild( this.shape );
+        GameObject.gameDisplay.removeChild( this.shape );
         this.shape = null;
     }
 }

@@ -19,14 +19,14 @@ class Orbit extends GameObject
     }
 
     onDestroy() {
-        GameObject.display.removeChild( this.shape );
+        GameObject.gameDisplay.removeChild( this.shape );
         this.shape = null;
     }
 
     setShape(x: number, y:number, radius: number)
     {
         if( this.shape ){
-            GameObject.display.removeChild(this.shape);        
+            GameObject.gameDisplay.removeChild(this.shape);        
         }
 
         this.shape = new egret.Shape();
@@ -35,7 +35,7 @@ class Orbit extends GameObject
 
         this.shape.graphics.lineStyle(1, 0xf0f0f0);
         this.shape.graphics.drawCircle(0, 0, radius);
-        GameObject.display.addChild(this.shape);
+        GameObject.gameDisplay.addChild(this.shape);
     }
 
 

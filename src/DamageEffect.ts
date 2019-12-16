@@ -10,14 +10,14 @@ class DamageEffect extends GameObject
     }
 
     onDestroy() {
-        GameObject.display.removeChild( this.shape );
+        GameObject.gameDisplay.removeChild( this.shape );
         this.shape = null;
     }
 
     setShape( x:number, y:number, size: number )
     {
         if( this.shape ){
-            GameObject.display.removeChild(this.shape);        
+            GameObject.gameDisplay.removeChild(this.shape);        
         }
 
         this.shape = new egret.Shape();
@@ -28,12 +28,7 @@ class DamageEffect extends GameObject
         //this.shape.graphics.drawCircle( 0, 0, size );
         this.shape.graphics.drawRect( -size/2, -size/2, size, size );
 
-        if( Button.uiIndex == 0 ){
-            GameObject.display.addChild( this.shape );
-        }
-        else{
-            GameObject.display.addChildAt( this.shape, Button.uiIndex );
-        }    
+        GameObject.gameDisplay.addChildAt( this.shape, Button.uiIndex );
     }
 
 

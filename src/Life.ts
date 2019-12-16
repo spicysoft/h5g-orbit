@@ -19,7 +19,7 @@ class Life extends GameObject
         Life.I = this;
         this.life = DEF_LIFE;
         this.text = Util.myText(300, 5, "LIFE :", 60, 0.5, this.textColor, true);
-        GameObject.display.addChild( this.text );
+        GameObject.uiDisplay.addChild( this.text );
 
         let x = 100 + 300;
         let y = 16 + 5;
@@ -30,17 +30,17 @@ class Life extends GameObject
             this.shapes[i].graphics.beginFill(PLAYER_COLOR);
             this.shapes[i].graphics.drawCircle(0, 0, 12);
             this.shapes[i].graphics.endFill();
-            GameObject.display.addChild(this.shapes[i]);
+            GameObject.uiDisplay.addChild(this.shapes[i]);
         }
     }
 
 
     onDestroy() {
-        GameObject.display.removeChild( this.text );
+        GameObject.uiDisplay.removeChild( this.text );
         this.text = null;
 
         for( let i = 0; i < DEF_LIFE; i++ ){
-            GameObject.display.removeChild( this.shapes[i] );
+            GameObject.uiDisplay.removeChild( this.shapes[i] );
             this.shapes[i] = null;
         }
 
