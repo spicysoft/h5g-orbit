@@ -27,7 +27,7 @@ class PositiveEffect extends GameObject
         this.shape.graphics.lineStyle( 2, 0xffff00 );
         this.shape.graphics.drawCircle( 0, 0, size );
 
-        GameObject.gameDisplay.addChildAt( this.shape, Button.uiIndex );
+        GameObject.gameDisplay.addChild( this.shape );
     }
 
 

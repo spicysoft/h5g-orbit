@@ -28,7 +28,7 @@ class DamageEffect extends GameObject
         //this.shape.graphics.drawCircle( 0, 0, size );
         this.shape.graphics.drawRect( -size/2, -size/2, size, size );
 
-        GameObject.gameDisplay.addChildAt( this.shape, Button.uiIndex );
+        GameObject.gameDisplay.addChild( this.shape );
     }
 
 

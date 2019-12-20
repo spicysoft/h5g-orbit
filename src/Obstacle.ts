@@ -52,7 +52,7 @@ class Obstacle extends GameObject
             this.shape.graphics.endFill();
         }
 
-        GameObject.gameDisplay.addChildAt( this.shape, Button.uiIndex );
+        GameObject.gameDisplay.addChild( this.shape );
     }
 
 
